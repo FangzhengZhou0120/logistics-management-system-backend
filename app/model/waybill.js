@@ -4,6 +4,7 @@ module.exports = app => {
     const Waybill = app.model.define('waybill', {
         id: { type: INTEGER, primaryKey: true, autoIncrement: true },
         carNumber: { type: STRING(100), field: 'car_number' },
+        carNumberColor: { type: INTEGER, field: 'car_number_color' },
         cargoType: { type: INTEGER, field: 'cargo_type' },
         cargoWeight: { type: INTEGER, field: 'cargo_weight' },
         driverId: { type: INTEGER, field: 'driver_id' },
@@ -16,7 +17,8 @@ module.exports = app => {
         endTime: { type: DATE, field: 'end_time' },
         status: { type: INTEGER, field: 'status' },
         remark: { type: STRING(2000), field: 'remark' },
-        fileList: { type: STRING(4000), field: 'file_list' },
+        fileList: { type: STRING(2000), field: 'file_list' },
+        endFileList: { type: STRING(2000), field: 'end_file_list' },
         extra: { type: STRING(4000) },
         createdAt: { type: DATE, field: 'created_at' },
         updatedAt: { type: DATE, field: 'updated_at' },

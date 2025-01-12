@@ -34,6 +34,12 @@ class UserController extends Controller {
         const user = await ctx.service.user.show(ctx.params.id);
         ctx.body = user;
     }
+
+    async getUserByRole() {
+        const { ctx } = this;
+        const users = await ctx.service.user.getUserByRole(ctx.query.role);
+        ctx.body = users;
+    }
 }
 
 module.exports = UserController;

@@ -3,6 +3,7 @@
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
+require('dotenv').config()
 module.exports = appInfo => {
   /**
    * built-in config
@@ -27,6 +28,12 @@ module.exports = appInfo => {
       underscored: false,
     }
   };
+
+  exports.security = {
+    csrf: {
+      enable: false,
+    },
+  }
 
   config.onerror = {
     all(err, ctx) {

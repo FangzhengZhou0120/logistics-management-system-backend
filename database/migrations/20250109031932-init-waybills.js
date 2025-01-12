@@ -14,6 +14,7 @@ module.exports = {
     await queryInterface.createTable('waybills', {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
       car_number: {type: STRING(100), defaultValue: '', allowNull: false},
+      car_number_color : {type: INTEGER, defaultValue: '0', allowNull: false},
       cargo_type: {type: INTEGER, defaultValue: '0', allowNull: false},
       cargo_weight: {type: INTEGER, defaultValue: '0', allowNull: false},
       driver_id: {type: INTEGER, defaultValue: '0', allowNull: false},
@@ -26,7 +27,8 @@ module.exports = {
       end_time: {type: DATE, defaultValue: null, allowNull: true},
       status: {type: INTEGER, defaultValue: '0', allowNull: false},
       remark: {type: STRING(2000), defaultValue: '', allowNull: false},
-      file_list: {type: STRING(4000), defaultValue: '', allowNull: false},
+      file_list: {type: STRING(2000), defaultValue: '', allowNull: false},
+      end_file_list: {type: STRING(2000), defaultValue: '', allowNull: false},
       extra: {type: STRING(4000), defaultValue: '', allowNull: false},
       created_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
       updated_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},

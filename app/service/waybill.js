@@ -17,6 +17,7 @@ class Waybill extends Service {
     async create(data) {
         const { ctx } = this;
         data.status = 1;
+        data.startTime = new Date(data.startTime);
         const waybill = await ctx.model.Waybill.create(data);
         return waybill;
     }

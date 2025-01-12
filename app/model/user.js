@@ -7,6 +7,7 @@ module.exports = app => {
         password: STRING(200),
         role: INTEGER,
         phone: STRING(100),
+        remark: STRING(2000),
         createdAt: { type: DATE, field: 'created_at' },
         updatedAt: { type: DATE, field: 'updated_at' },
     });

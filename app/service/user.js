@@ -4,6 +4,7 @@ class User extends Service {
     async list({ pageIndex = 1, pageSize = 10, options }) {
         const offset = (pageIndex - 1) * pageSize
         return this.ctx.model.User.findAndCountAll({
+            attributes: { exclude: ['password'] },
             where: options,
             offset,
             limit: pageSize,
@@ -39,11 +40,24 @@ class User extends Service {
 
     async show(id) {
         const { ctx } = this;
-        const user = await ctx.model.User.findByPk(id);
+        const user = await ctx.model.User.findByPk(id, {
+            attributes: { exclude: ['password'] }
+        });
         if (!user) {
             ctx.throw(404, 'user not found');
         }
         return user;
+    }
+
+    async getUserByRole(role) {
+        const { ctx } = this;
+        const user = await ctx.model.User.findAll({
+            attributes: { exclude: ['password'] },
+            where: {
+                role
+            }
+        });
+        return user
     }
 }
 
