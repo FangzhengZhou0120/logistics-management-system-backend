@@ -25,7 +25,7 @@ class UserController extends Controller {
 
     async delete() {
         const { ctx } = this;
-        const user = await ctx.service.user.destroy(ctx.params.id);
+        const user = await ctx.service.user.destroy(ctx.request.body.id);
         ctx.body = user;
     }
 
@@ -43,10 +43,10 @@ class UserController extends Controller {
 
     async login() {
         const { ctx } = this;
-        const { username, password } = ctx.request.body;
+        const { phone, password } = ctx.request.body;
         const user = await ctx.model.User.findOne({
             where: {
-                username,
+                phone,
                 password
             }
         });
@@ -56,6 +56,12 @@ class UserController extends Controller {
         } else {
             ctx.throw(401, '用户名或密码错误');
         }
+    }
+
+    async logout() {
+        const { ctx } = this;
+        ctx.session.user = null;
+        ctx.body = '退出成功';
     }
 }
 

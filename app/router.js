@@ -12,7 +12,10 @@ module.exports = app => {
   router.post('/user/list', controller.user.list);
   router.post('/user/create', controller.user.create);
   router.get('/user/role', controller.user.getUserByRole);
+  router.post('/user/update', controller.user.update);
+  router.post('/user/delete', controller.user.delete);
   router.post('/login', controller.user.login)
+  router.get('/logout', controller.user.logout)
 
   // router.get('/city/import', controller.city.importCity);
   router.get('/city/list', controller.city.getCityList);
