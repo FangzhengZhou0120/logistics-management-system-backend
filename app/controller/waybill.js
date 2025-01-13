@@ -1,4 +1,5 @@
 const { OSS_BUCKET, OSS_REGION } = require('../utility/constants');
+const { WAYBILL_NOT_FOUND } = require('../utility/error-code');
 const { getCredential, generateExpiration, hmacsha256, getOssObejctUrl } = require('../utility/helper');
 
 const Controller = require('egg').Controller;
@@ -133,6 +134,20 @@ class WaybillController extends Controller {
             console.error("Error in getUploadConfig: ", err);
             ctx.body = JSON.stringify(err);
         }
+    }
+
+    async finsihWaybill() {
+        const { ctx } = this;
+        const {id, endTime, endFileList} = ctx.request.body;
+        const waybill = await ctx.service.waybill.show(id);
+        if (!waybill) {
+            ctx.throw(500, WAYBILL_NOT_FOUND);
+        }
+        waybill.status = 2;
+        waybill.endTime = new Date(endTime);
+        waybill.endFileList = endFileList;
+        await ctx.service.waybill.update(waybill)
+        ctx.body = waybill;
     }
 }
 

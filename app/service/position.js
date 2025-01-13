@@ -34,7 +34,7 @@ class Position extends Service {
             };
             const res = await sinoiovHttpsCall(url, reqParam);
             let data = res.result.trackArray
-            console.log(data)
+            
             if (trajectory) {
                 data = res.result.trackArray.filter((it) => {
                     return parseCustomDateString(it.gtm).getTime() > trajectory.reportAt

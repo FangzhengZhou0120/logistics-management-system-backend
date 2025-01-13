@@ -40,6 +40,23 @@ class UserController extends Controller {
         const users = await ctx.service.user.getUserByRole(ctx.query.role);
         ctx.body = users;
     }
+
+    async login() {
+        const { ctx } = this;
+        const { username, password } = ctx.request.body;
+        const user = await ctx.model.User.findOne({
+            where: {
+                username,
+                password
+            }
+        });
+        if (user) {
+            ctx.session.user = user;
+            ctx.body = user;
+        } else {
+            ctx.throw(401, '用户名或密码错误');
+        }
+    }
 }
 
 module.exports = UserController;

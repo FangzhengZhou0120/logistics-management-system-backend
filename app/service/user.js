@@ -1,3 +1,5 @@
+const { USER_NOT_FOUND } = require('../utility/error-code');
+
 const Service = require('egg').Service;
 
 class User extends Service {
@@ -22,7 +24,7 @@ class User extends Service {
         const { ctx } = this;
         const user = await ctx.model.User.findByPk(data.id);
         if (!user) {
-            ctx.throw(404, 'user not found');
+            ctx.throw(500, USER_NOT_FOUND);
         }
         await user.update(data);
         return user;
@@ -32,7 +34,7 @@ class User extends Service {
         const { ctx } = this;
         const user = await ctx.model.User.findByPk(id);
         if (!user) {
-            ctx.throw(404, 'user not found');
+            ctx.throw(500, USER_NOT_FOUND);
         }
         await user.destroy();
         return user;
@@ -44,7 +46,7 @@ class User extends Service {
             attributes: { exclude: ['password'] }
         });
         if (!user) {
-            ctx.throw(404, 'user not found');
+            ctx.throw(500, USER_NOT_FOUND);
         }
         return user;
     }

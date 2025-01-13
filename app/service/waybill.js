@@ -1,3 +1,5 @@
+const { WAYBILL_NOT_FOUND } = require('../utility/error-code');
+
 const Service = require('egg').Service;
 
 class Waybill extends Service {
@@ -26,7 +28,7 @@ class Waybill extends Service {
         const { ctx } = this;
         const waybill = await ctx.model.Waybill.findByPk(data.id);
         if (!waybill) {
-            ctx.throw(404, 'waybill not found');
+            ctx.throw(500, WAYBILL_NOT_FOUND);
         }
         await waybill.update(data);
         return waybill;
@@ -36,7 +38,7 @@ class Waybill extends Service {
         const { ctx } = this;
         const waybill = await ctx.model.Waybill.findByPk(id);
         if (!waybill) {
-            ctx.throw(404, 'waybill not found');
+            ctx.throw(500, WAYBILL_NOT_FOUND);
         }
         await waybill.destroy();
         return waybill;
@@ -46,7 +48,7 @@ class Waybill extends Service {
         const { ctx } = this;
         const waybill = await ctx.model.Waybill.findByPk(id);
         if (!waybill) {
-            ctx.throw(404, 'waybill not found');
+            ctx.throw(500, WAYBILL_NOT_FOUND);
         }
         return waybill;
     }
