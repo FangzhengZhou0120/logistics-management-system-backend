@@ -42,6 +42,7 @@ class WaybillController extends Controller {
         const { ctx } = this;
         const waybill = await ctx.service.waybill.show(ctx.query.id);
         waybill.fileList = waybill.fileList ? waybill.fileList.split(",").map(it => getOssObejctUrl(it)).join(",") : ""
+        waybill.endFileList = waybill.endFileList ? waybill.endFileList.split(",").map(it => getOssObejctUrl(it)).join(",") : ""
         ctx.body = waybill;
     }
 
@@ -139,14 +140,14 @@ class WaybillController extends Controller {
     async finsihWaybill() {
         const { ctx } = this;
         const {id, endTime, endFileList} = ctx.request.body;
-        const waybill = await ctx.service.waybill.show(id);
-        if (!waybill) {
-            ctx.throw(500, WAYBILL_NOT_FOUND);
-        }
-        waybill.status = 2;
-        waybill.endTime = new Date(endTime);
-        waybill.endFileList = endFileList;
-        await ctx.service.waybill.update(waybill)
+        const updatedWaybill = await ctx.service.waybill.update({ id, endTime, endFileList, status: 2 });
+        ctx.body = updatedWaybill;
+    }
+
+    async cancelWaybill() {
+        const { ctx } = this;
+        const {id} = ctx.request.body;
+        const waybill = await ctx.service.waybill.update({id, status: 99});
         ctx.body = waybill;
     }
 }

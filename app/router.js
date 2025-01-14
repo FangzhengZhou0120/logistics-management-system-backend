@@ -5,8 +5,9 @@ module.exports = app => {
   const { router, controller } = app;
   router.post('/waybill/list', controller.waybill.list);
   router.post('/waybill/create', controller.waybill.create);
-  router.post('/waybill/cancel', controller.waybill.delete);
+  router.post('/waybill/cancel', controller.waybill.cancelWaybill);
   router.get('/waybill/detail', controller.waybill.find);
+  router.post('/waybill/finish', controller.waybill.finsihWaybill);
   router.get('/waybill/upload', controller.waybill.getUploadConfig);
 
   router.post('/user/list', controller.user.list);
