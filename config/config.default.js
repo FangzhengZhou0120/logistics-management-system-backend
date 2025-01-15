@@ -15,7 +15,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1735787647056_9638';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ['auth'];
 
   config.sequelize = {
     dialect: 'mysql',
