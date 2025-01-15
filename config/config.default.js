@@ -15,7 +15,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1735787647056_9638';
 
   // add your middleware config here
-  config.middleware = ['auth'];
+  config.middleware = [];
 
   config.sequelize = {
     dialect: 'mysql',
@@ -33,6 +33,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
+    domainWhiteList: ['*']
   }
 
   config.onerror = {
@@ -46,8 +47,8 @@ module.exports = appInfo => {
 
 
   config.cors = {
-    origin: '*', // 允许的前端来源
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+    origin: 'http://localhost:5173', // 允许的前端来源
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
     credentials: true, // 如果需要支持带有 cookie 的请求
   };
 

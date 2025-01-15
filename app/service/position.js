@@ -40,21 +40,23 @@ class Position extends Service {
                     return parseCustomDateString(it.gtm).getTime() > trajectory.reportAt
                 })
             }
-            data = data.map((item) => {
-                return {
-                    waybillId,
-                    carNumber,
-                    carNumberColor,
-                    longitude: Number(item.lon) / 600000,
-                    latitude: Number(item.lat) / 600000,
-                    direction: Number(item.agl),
-                    hgt: Number(item.hgt),
-                    speed: Number(item.spd),
-                    mlg: Number(item.mlg),
-                    reportAt: parseCustomDateString(item.gtm).getTime(),
-                }
-            });
-            await this.ctx.model.Trajectory.bulkCreate(data);
+            if(data && data.length > 0) {
+                data = data.map((item) => {
+                    return {
+                        waybillId,
+                        carNumber,
+                        carNumberColor,
+                        longitude: Number(item.lon) / 600000,
+                        latitude: Number(item.lat) / 600000,
+                        direction: Number(item.agl),
+                        hgt: Number(item.hgt),
+                        speed: Number(item.spd),
+                        mlg: Number(item.mlg),
+                        reportAt: parseCustomDateString(item.gtm).getTime(),
+                    }
+                });
+                await this.ctx.model.Trajectory.bulkCreate(data);
+            }
         }
         return this.getTrajectoryList(waybillId, startTime, endTime);
     }

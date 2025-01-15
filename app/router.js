@@ -19,7 +19,7 @@ module.exports = app => {
   router.get('/logout', controller.user.logout)
 
   // router.get('/city/import', controller.city.importCity);
-  router.get('/city/list', controller.city.getCityList);
+  // router.get('/city/list', controller.city.getCityList);
 
   router.post('/position/now', controller.position.getVehiclePosition);
   router.post('/position/trajectory', controller.position.getTrajectory);

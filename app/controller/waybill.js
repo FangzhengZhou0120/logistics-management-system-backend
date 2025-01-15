@@ -16,6 +16,7 @@ class WaybillController extends Controller {
         body.startLocationCode ? options.startLocationCode = body.startLocationCode : null
         body.endLocationCode ? options.endLocationCode = body.endLocationCode : null
         body.startTime ? options.startTime = body.startTime : null
+        body.status && body.status.length > 0 ? options.status = body.status : null
         const waybill = await ctx.service.waybill.list({ pageIndex: body.pageIndex, pageSize: body.pageSize, options });
         ctx.body = waybill;
     }

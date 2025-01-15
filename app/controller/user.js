@@ -5,7 +5,7 @@ class UserController extends Controller {
         const options = {}
         const body = this.ctx.request.body
         body.id ? options.id = body.id: null
-        body.username ? options.username = body.username: null
+        body.userName ? options.userName = body.userName: null
         body.role && body.role.length > 0 ? options.role = body.role: null
         const user = await this.ctx.service.user.list({ pageIndex: body.pageIndex, pageSize: body.pageSize, options });
         this.ctx.body = user;
@@ -51,7 +51,12 @@ class UserController extends Controller {
             }
         });
         if (user) {
-            ctx.session.user = user;
+            ctx.session.user = {
+                id: user.id,
+                phone: user.phone,
+                userName: user.userName,
+                role: user.role
+            };
             ctx.body = user;
         } else {
             ctx.throw(401, '用户名或密码错误');
