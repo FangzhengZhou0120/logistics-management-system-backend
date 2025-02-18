@@ -1,3 +1,5 @@
+const { start } = require("egg");
+
 module.exports = app => {
     const { STRING, INTEGER, DATE } = app.Sequelize;
 
@@ -13,6 +15,8 @@ module.exports = app => {
         endLocation: { type: STRING(100), field: 'end_location' },
         startLocationCode: { type: STRING(100), field: 'start_location_code' },
         endLocationCode: { type: STRING(100), field: 'end_location_code' },
+        startAddress: { type: STRING(200), field: 'start_address' },
+        endAddress: { type: STRING(200), field: 'end_address' },
         startTime: { type: DATE, field: 'start_time' },
         endTime: { type: DATE, field: 'end_time' },
         status: { type: INTEGER, field: 'status' },
@@ -20,6 +24,11 @@ module.exports = app => {
         fileList: { type: STRING(2000), field: 'file_list' },
         endFileList: { type: STRING(2000), field: 'end_file_list' },
         extra: { type: STRING(4000) },
+        sender: { type: STRING(100) },
+        receiver: { type: STRING(100) },
+        senderPhone: { type: STRING(100), field: 'sender_phone' },
+        receiverPhone: { type: STRING(100), field: 'receiver_phone' },
+        clientName: { type: STRING(100), field: 'client_name' },
         createdAt: { type: DATE, field: 'created_at' },
         updatedAt: { type: DATE, field: 'updated_at' },
     });
