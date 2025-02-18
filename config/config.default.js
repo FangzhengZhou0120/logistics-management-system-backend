@@ -19,11 +19,11 @@ module.exports = appInfo => {
 
   config.sequelize = {
     dialect: 'mysql',
-    host: 'rm-wz93tbz62px4le0my.mysql.rds.aliyuncs.com',
+    host: '127.0.0.1',
     port: 3306,
     database: 'logistics_management',
-    username: 'dbuser',
-    password: 'Aa890604',
+    username: 'root',
+    password: '13b71a1b',
     define: {
       underscored: false,
     }
@@ -33,7 +33,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: ['*']
+    domainWhiteList: ['http://localhost:5173',"https://guagualogistics.com","https://www.guagualogistics.com"]
   }
 
   config.onerror = {
@@ -47,7 +47,7 @@ module.exports = appInfo => {
 
 
   config.cors = {
-    origin: ['http://localhost:5173',"https://guagualogistics.com","https://www.guagualogistics.com"], // 允许的前端来源
+    origin: "*", // 允许的前端来源
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
     credentials: true, // 如果需要支持带有 cookie 的请求
   };

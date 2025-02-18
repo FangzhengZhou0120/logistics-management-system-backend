@@ -46,6 +46,7 @@ module.exports = {
     await queryInterface.addIndex('waybills', ['driver_id'])
     await queryInterface.addIndex('waybills', ['status'])
     await queryInterface.addIndex('waybills', ['start_location_code'])
+    await queryInterface.addIndex('waybills', ['sender'])
     await queryInterface.addIndex('waybills', ['end_location_code'])
   },
 
