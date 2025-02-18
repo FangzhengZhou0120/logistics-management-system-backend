@@ -12,5 +12,12 @@
       "database": "logistics_management",
       "host": "127.0.0.1",
       "dialect": "mysql"
+    },
+    "production" : {
+      "username": "dbuser",
+      "password": "Aa890604",
+      "database": "logistics_management",
+      "host": "rm-wz93tbz62px4le0my.mysql.rds.aliyuncs.com",
+      "dialect": "mysql"
     }
   }

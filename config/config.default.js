@@ -19,11 +19,11 @@ module.exports = appInfo => {
 
   config.sequelize = {
     dialect: 'mysql',
-    host: 'localhost',
+    host: 'rm-wz93tbz62px4le0my.mysql.rds.aliyuncs.com',
     port: 3306,
     database: 'logistics_management',
-    username: 'root',
-    password: '13b71a1b',
+    username: 'dbuser',
+    password: 'Aa890604',
     define: {
       underscored: false,
     }
