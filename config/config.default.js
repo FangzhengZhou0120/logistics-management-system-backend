@@ -47,7 +47,7 @@ module.exports = appInfo => {
 
 
   config.cors = {
-    origin: 'http://localhost:5173', // 允许的前端来源
+    origin: ['http://localhost:5173',"https://guagualogistics.com","https://www.guagualogistics.com"], // 允许的前端来源
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
     credentials: true, // 如果需要支持带有 cookie 的请求
   };
