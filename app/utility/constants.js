@@ -1,5 +1,5 @@
 
-const SINOIOV_BASE_URL = 'https://openapi-test.sinoiov.cn/save/apis/'
+const SINOIOV_BASE_URL = 'https://zhiyunopenapi.95155.com/save/apis/'
 
 const OSS_BUCKET = "logistics-management-system"
 

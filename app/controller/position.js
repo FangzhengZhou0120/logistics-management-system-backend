@@ -14,8 +14,8 @@ class PositionController extends Controller {
         const { ctx } = this
         const { waybillId, carNumber, carNumberColor, startTime, endTime } = ctx.request.body
         const now = new Date().getTime()
-        const qryStartTime = startTime && startTime < now ? transformDate(new Date(startTime)) : transformDate(new Date(now))
-        const qryEndTime = endTime && endTime < now ? transformDate(new Date(endTime)) : transformDate(new Date(now))
+        const qryStartTime = startTime && new Date(startTime).getTime() < now ? transformDate(new Date(startTime)) : transformDate(new Date(now))
+        const qryEndTime = endTime && new Date(endTime).getTime() < now ? transformDate(new Date(endTime)) : transformDate(new Date(now))
         const trajectory = await ctx.service.position.getTrajectory(waybillId, carNumber, carNumberColor.toString(), qryStartTime, qryEndTime)
         ctx.body = trajectory
     }
