@@ -18,6 +18,8 @@ module.exports = {
       role: {type: INTEGER, defaultValue: '0', allowNull: false},
       phone: {type: STRING(100), defaultValue: '', allowNull: false},
       remark: {type: STRING(2000), defaultValue: '', allowNull: false},
+      client_id: {type: INTEGER, defaultValue: '0', allowNull: false},
+      client_name: {type: STRING(100), defaultValue: '', allowNull: false},
       created_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
       updated_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
     })

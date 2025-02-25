@@ -1,3 +1,5 @@
+const client = require("./client");
+
 module.exports = app => {
     const { STRING, INTEGER, DATE } = app.Sequelize;
 
@@ -17,6 +19,7 @@ module.exports = app => {
         receiver: { type: STRING(100) },
         senderPhone: { type: STRING(100), field: 'sender_phone' },
         receiverPhone: { type: STRING(100), field: 'receiver_phone' },
+        clientId: { type: INTEGER, field: 'client_id'},
         clientName: { type: STRING(100), field: 'client_name' },
         createdAt: { type: DATE, field: 'created_at' },
         updatedAt: { type: DATE, field: 'updated_at' },

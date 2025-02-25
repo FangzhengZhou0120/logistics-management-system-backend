@@ -51,12 +51,7 @@ class UserController extends Controller {
             }
         });
         if (user) {
-            ctx.session.user = {
-                id: user.id,
-                phone: user.phone,
-                userName: user.userName,
-                role: user.role
-            };
+            ctx.session.user = user;
             ctx.body = user;
         } else {
             ctx.throw(401, '用户名或密码错误');

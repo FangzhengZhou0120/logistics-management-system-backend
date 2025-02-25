@@ -23,4 +23,14 @@ module.exports = app => {
 
   router.post('/api/position/now', controller.position.getVehiclePosition);
   router.post('/api/position/trajectory', controller.position.getTrajectory);
+
+  router.post('/api/order/list', controller.order.list);
+  router.post('/api/order/create', controller.order.create);
+  router.post('/api/order/update', controller.order.update);
+  router.post('/api/order/delete', controller.order.delete);
+
+  router.post('/api/client/list', controller.client.list);
+  router.post('/api/client/create', controller.client.create);
+  router.post('/api/client/update', controller.client.update);
+  router.post('/api/client/delete', controller.client.delete);
 };

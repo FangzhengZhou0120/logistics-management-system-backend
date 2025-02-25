@@ -17,6 +17,10 @@ class WaybillController extends Controller {
         body.endLocationCode ? options.endLocationCode = body.endLocationCode : null
         body.startTime ? options.startTime = body.startTime : null
         body.status && body.status.length > 0 ? options.status = body.status : null
+        const user = ctx.session.user
+        if(user.role === 3) {
+            options.clientId = user.clientId
+        }
         const waybill = await ctx.service.waybill.list({ pageIndex: body.pageIndex, pageSize: body.pageSize, options });
         ctx.body = waybill;
     }

@@ -40,7 +40,8 @@ class Waybill extends Service {
         if (!waybill) {
             ctx.throw(500, WAYBILL_NOT_FOUND);
         }
-        await waybill.destroy();
+        waybill.status = 99
+        await waybill.update(waybill);
         return waybill;
     }
 

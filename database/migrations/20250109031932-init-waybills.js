@@ -35,8 +35,10 @@ module.exports = {
       receiver: {type: STRING(100), defaultValue: '', allowNull: false},
       sender_phone: {type: STRING(100), defaultValue: '', allowNull: false},
       receiver_phone: {type: STRING(100), defaultValue: '', allowNull: false},
+      client_id: {type: INTEGER, defaultValue: '0', allowNull: false},
       client_name: {type: STRING(100), defaultValue: '', allowNull: false},
       extra: {type: STRING(4000), defaultValue: '', allowNull: false},
+      order_id: {type: INTEGER, defaultValue: '0', allowNull: false},
       created_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
       updated_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
     })
