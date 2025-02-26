@@ -10,7 +10,6 @@ module.exports = app => {
         endLocation: { type: STRING(100), field: 'end_location' },
         endLocationCode: { type: STRING(100), field: 'end_location_code' },
         endAddress: { type: STRING(200), field: 'end_address' },
-        startTime: { type: DATE, field: 'start_time' },
         endTime: { type: DATE, field: 'end_time' },
         status: { type: INTEGER, field: 'status' },
         remark: { type: STRING(2000), field: 'remark' },
