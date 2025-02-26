@@ -16,6 +16,7 @@ class Order extends Service {
 
     async create(data) {
         const { ctx } = this;
+        data.status = 1;
         const order = await ctx.model.Order.create(data);
         return order;
     }
@@ -57,6 +58,13 @@ class Order extends Service {
             }
         });
         return orders;
+    }
+
+    async getAllOrder() {
+        return this.ctx.model.Order.findAll({
+            attributes: ['id'],
+            order: [['id', 'desc']],
+        });
     }
 }
 

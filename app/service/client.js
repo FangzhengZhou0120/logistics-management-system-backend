@@ -1,4 +1,5 @@
 const Service = require('egg').Service;
+const { Op } = require('sequelize');
 
 class Client extends Service {
     async list({ pageIndex = 1, pageSize = 10, options }) {
@@ -38,6 +39,13 @@ class Client extends Service {
         }
         await client.destroy();
         return client;
+    }
+
+    async getAllClient() {
+        return this.ctx.model.Client.findAll({
+            attributes: ['id', 'clientName'],
+            order: [['id', 'desc']],
+        });
     }
 }
 

@@ -51,6 +51,22 @@ class OrderController extends Controller {
         const orders = await ctx.service.order.getOrderByClient(user.clientId);
         ctx.body = orders;
     }
+
+    async finishOrder() {
+        const { ctx } = this;
+        const order = await ctx.service.order.find(ctx.request.body.id);
+        if (!order) {
+            ctx.throw(500, ORDER_NOT_FOUND);
+        }
+        await order.update({status: 2, endTime: new Date()});
+        ctx.body = order;
+    }
+
+    async getAllOrder() {
+        const { ctx } = this;
+        const orders = await ctx.service.order.getAllOrder();
+        ctx.body = orders;
+    }
 }
 
 module.exports = OrderController;

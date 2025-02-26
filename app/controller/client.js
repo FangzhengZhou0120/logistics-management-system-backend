@@ -27,6 +27,11 @@ class ClientController extends Controller {
         const client = await ctx.service.client.destroy(ctx.request.body.id);
         ctx.body = client;
     }
+
+    async getAllClient() {
+        const client = await this.ctx.service.client.getAllClient();
+        this.ctx.body = client;
+    }
 }
 
 module.exports = ClientController;

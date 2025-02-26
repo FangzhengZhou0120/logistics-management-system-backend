@@ -28,9 +28,14 @@ module.exports = app => {
   router.post('/api/order/create', controller.order.create);
   router.post('/api/order/update', controller.order.update);
   router.post('/api/order/delete', controller.order.delete);
+  router.post('/api/order/finish', controller.order.finishOrder);
+  router.get('/api/order/detail', controller.order.find);
+  router.get('/api/order/all', controller.order.getAllOrder);
+
 
   router.post('/api/client/list', controller.client.list);
   router.post('/api/client/create', controller.client.create);
   router.post('/api/client/update', controller.client.update);
   router.post('/api/client/delete', controller.client.delete);
+  router.get('/api/client/all', controller.client.getAllClient);
 };
