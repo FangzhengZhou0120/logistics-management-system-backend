@@ -33,7 +33,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: ['http://localhost:5173',"https://guagualogistics.com","https://www.guagualogistics.com"]
+    domainWhiteList: ['http://localhost:5173',"https://guagualogistics.com","https://www.guagualogistics.com","http://guagualogistics.com","http://www.guagualogistics.com"]
   }
 
   config.onerror = {
