@@ -1,3 +1,5 @@
+const { ORDER_NOT_FOUND } = require('../utility/error-code');
+
 const Service = require('egg').Service;
 
 class Order extends Service {
@@ -60,9 +62,10 @@ class Order extends Service {
         return orders;
     }
 
-    async getAllOrder() {
+    async getAllOrder(options) {
         return this.ctx.model.Order.findAll({
             attributes: ['id'],
+            where: options,
             order: [['id', 'desc']],
         });
     }

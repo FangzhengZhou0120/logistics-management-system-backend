@@ -34,8 +34,7 @@ class OrderController extends Controller {
         if (!order) {
             ctx.throw(500, ORDER_NOT_FOUND);
         }
-        order.status = 99
-        await ctx.service.order.update(order);
+        await order.update({status: 99});
         ctx.body = order;
     }
 
@@ -64,7 +63,12 @@ class OrderController extends Controller {
 
     async getAllOrder() {
         const { ctx } = this;
-        const orders = await ctx.service.order.getAllOrder();
+        const user = ctx.session.user
+        const options = {}
+        if(user.role === 3) {
+            options.clientId = user.clientId
+        }
+        const orders = await ctx.service.order.getAllOrder(options);
         ctx.body = orders;
     }
 }

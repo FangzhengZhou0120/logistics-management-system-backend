@@ -7,6 +7,7 @@ class UserController extends Controller {
         body.id ? options.id = body.id: null
         body.userName ? options.userName = body.userName: null
         body.role && body.role.length > 0 ? options.role = body.role: null
+        body.clientId && body.clientId.length > 0 ? options.clientId = body.clientId: null
         const user = await this.ctx.service.user.list({ pageIndex: body.pageIndex, pageSize: body.pageSize, options });
         this.ctx.body = user;
     }

@@ -31,6 +31,7 @@ module.exports = app => {
         receiverPhone: { type: STRING(100), field: 'receiver_phone' },
         clientId: { type: INTEGER, field: 'client_id'},
         clientName: { type: STRING(100), field: 'client_name' },
+        orderId: { type: INTEGER, field: 'order_id' },
         createdAt: { type: DATE, field: 'created_at' },
         updatedAt: { type: DATE, field: 'updated_at' },
     });
