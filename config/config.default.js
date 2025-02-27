@@ -19,11 +19,11 @@ module.exports = appInfo => {
 
   config.sequelize = {
     dialect: 'mysql',
-    host: '127.0.0.1',
+    host: process.env.DATABASE_HOST,
     port: 3306,
     database: 'logistics_management',
-    username: 'root',
-    password: '13b71a1b',
+    username: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
     define: {
       underscored: false,
     }
