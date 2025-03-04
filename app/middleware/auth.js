@@ -1,7 +1,7 @@
 module.exports = () => {
     return async function auth(ctx, next) {
       // Skip auth check for login route
-      if (ctx.path === '/login') {
+      if (ctx.path === '/api/login') {
         return await next();
       }
   
