@@ -2,6 +2,10 @@ const axios = require('axios');
 const https = require('https');
 const crypto = require('crypto');
 
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false // WARNING: This bypasses SSL certificate validation
+});
+
 async function sinoiovHttpsCall(url, param) {
   // 1. 签名处理
   processParam(param);
@@ -29,7 +33,7 @@ async function sinoiovHttpsCall(url, param) {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },
-      //httpsAgent
+      httpsAgent
     });
 
     // 响应成功
