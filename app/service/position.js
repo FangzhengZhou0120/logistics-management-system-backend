@@ -2,6 +2,7 @@ const Service = require('egg').Service;
 const { sinoiovHttpsCall } = require('../utility/request-sinoiov');
 const { SINOIOV_BASE_URL } = require('../utility/constants');
 const { parseCustomDateString } = require('../utility/helper');
+const { Op } = require('sequelize');
 
 class Position extends Service {
 
@@ -78,6 +79,10 @@ class Position extends Service {
         const trajectory = await this.ctx.model.Trajectory.findAll({
             where: {
                 waybillId,
+                reportAt: {
+                    [Op.gte]: startTime,
+                    [Op.lte]: endTime
+                }
             },
             order: [
                 ['reportAt', 'ASC']
