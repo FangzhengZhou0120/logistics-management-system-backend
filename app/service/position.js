@@ -14,6 +14,7 @@ class Position extends Service {
             srt: process.env.SINOIOV_SRT,
         };
         const res = await sinoiovHttpsCall(url, reqParam);
+        console.log(res)
         const data = res.result.firstVcl
         data.lat = Number(res.result.firstVcl.lat) / 600000
         data.lon = Number(res.result.firstVcl.lon) / 600000
