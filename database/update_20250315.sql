@@ -1,0 +1,10 @@
+alter table `orders` add column `pick_up_date` datetime null;
+alter table `orders` add column `receive_company` varchar(100) not null default '';
+alter table `waybills` add column `waybill_number` varchar(200) not null default '';
+alter table `waybills` add column `pick_up_phone` varchar(20) not null default '';
+alter table `waybills` add column `receive_company` varchar(100) not null default '';
+alter table `waybills` add column `cargo_count` INT not null default '0';
+alter table `waybills` add column `cargo_volume` INT not null default '0';
+ALTER TABLE `waybills` MODIFY COLUMN `cargo_weight` double NOT NULL DEFAULT 0 AFTER `cargo_type`;
+ALTER TABLE `waybills` MODIFY COLUMN `cargo_type` varchar(20) NOT NULL DEFAULT '' AFTER `id`;
+ALTER TABLE `orders` MODIFY COLUMN `cargo_type` varchar(20) NOT NULL DEFAULT '' AFTER `id`;

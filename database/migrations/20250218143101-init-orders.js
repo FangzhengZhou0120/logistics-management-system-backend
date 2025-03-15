@@ -29,6 +29,8 @@ module.exports = {
       extra: {type: STRING(2000), defaultValue: '', allowNull: false},
       created_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
       updated_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
+      receive_company: {type: STRING(100), defaultValue: '', allowNull: false},
+      pick_up_date: {type: DATE, defaultValue: null, allowNull: true},
     })
 
     await queryInterface.addIndex('orders', ['client_name'])

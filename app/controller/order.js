@@ -6,7 +6,7 @@ class OrderController extends Controller {
         const options = {}
         const body = this.ctx.request.body
         body.id ? options.id = body.id : null
-        body.cargoType && body.cargoType.length > 0 ? options.cargoType = body.cargoType : null
+        body.cargoType ? options.cargoType = body.cargoType : null
         body.endLocationCode ? options.endLocationCode = body.endLocationCode : null
         const user = ctx.session.user
         if(user.role === 3) {

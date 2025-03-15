@@ -2,14 +2,14 @@ const { start } = require("egg");
 const client = require("./client");
 
 module.exports = app => {
-    const { STRING, INTEGER, DATE } = app.Sequelize;
+    const { STRING, INTEGER, DATE, DOUBLE } = app.Sequelize;
 
     const Waybill = app.model.define('waybill', {
         id: { type: INTEGER, primaryKey: true, autoIncrement: true },
         carNumber: { type: STRING(100), field: 'car_number' },
         carNumberColor: { type: INTEGER, field: 'car_number_color' },
-        cargoType: { type: INTEGER, field: 'cargo_type' },
-        cargoWeight: { type: INTEGER, field: 'cargo_weight' },
+        cargoType: { type: STRING(20), field: 'cargo_type' },
+        cargoWeight: { type: DOUBLE, field: 'cargo_weight' },
         driverId: { type: INTEGER, field: 'driver_id' },
         driverName: { type: STRING(100), field: 'driver_name' },
         startLocation: { type: STRING(100), field: 'start_location' },
@@ -34,6 +34,11 @@ module.exports = app => {
         orderId: { type: INTEGER, field: 'order_id' },
         createdAt: { type: DATE, field: 'created_at' },
         updatedAt: { type: DATE, field: 'updated_at' },
+        receiveCompany: {type: STRING(100), field: 'receive_company'},
+        waybillNumber: {type: STRING(200), field: 'waybill_number'},
+        pickUpPhone: {type: STRING(20), field: 'pick_up_phone'},
+        cargoCount: {type: INTEGER, field: 'cargo_count'},
+        cargoVolume: {type: DOUBLE, field: 'cargo_volume'},
     });
 
 

@@ -10,13 +10,13 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-    const { INTEGER, DATE, STRING } = Sequelize.DataTypes;
+    const { INTEGER, DATE, STRING, DOUBLE } = Sequelize.DataTypes;
     await queryInterface.createTable('waybills', {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
       car_number: {type: STRING(100), defaultValue: '', allowNull: false},
       car_number_color : {type: INTEGER, defaultValue: '0', allowNull: false},
       cargo_type: {type: INTEGER, defaultValue: '0', allowNull: false},
-      cargo_weight: {type: INTEGER, defaultValue: '0', allowNull: false},
+      cargo_weight: {type: DOUBLE, defaultValue: '0', allowNull: false},
       driver_id: {type: INTEGER, defaultValue: '0', allowNull: false},
       driver_name: {type: STRING(100), defaultValue: '', allowNull: false},
       start_location: {type: STRING(100), defaultValue: '', allowNull: false},
@@ -41,6 +41,11 @@ module.exports = {
       order_id: {type: INTEGER, defaultValue: '0', allowNull: false},
       created_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
       updated_at: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
+      receive_company: {type: STRING(100), defaultValue: '', allowNull: false},
+      waybill_number: {type: STRING(200), defaultValue: '', allowNull: false},
+      pick_up_phone: {type: STRING(20), defaultValue: '', allowNull: false},
+      cargo_count: {type: INTEGER, defaultValue: '0', allowNull: false},
+      cargo_volume: {type: DOUBLE, defaultValue: '0', allowNull: false},
     })
 
     await queryInterface.addIndex('waybills', ['car_number'])

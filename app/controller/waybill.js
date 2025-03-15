@@ -10,13 +10,14 @@ class WaybillController extends Controller {
         const options = {}
         const body = this.ctx.request.body
         body.id ? options.id = body.id : null
-        body.cargoType && body.cargoType.length > 0 ? options.cargoType = body.cargoType : null
+        body.cargoType ? options.cargoType = body.cargoType : null
         body.driverId && body.driverId > 0 ? options.driverId = body.driverId : null
         body.carNumber ? options.carNumber = body.carNumber : null
         body.startLocationCode ? options.startLocationCode = body.startLocationCode : null
         body.endLocationCode ? options.endLocationCode = body.endLocationCode : null
         body.startTime ? options.startTime = body.startTime : null
         body.status && body.status.length > 0 ? options.status = body.status : null
+        body.waybillNumber ? options.waybillNumber = body.waybillNumber : null
         const user = ctx.session.user
         if(user.role === 3) {
             options.clientId = user.clientId

@@ -5,7 +5,7 @@ module.exports = app => {
 
     const Order = app.model.define('order', {
         id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-        cargoType: { type: INTEGER, field: 'cargo_type' },
+        cargoType: { type: STRING(20), field: 'cargo_type' },
         cargoCount: { type: STRING(200), field: 'cargo_count' },
         endLocation: { type: STRING(100), field: 'end_location' },
         endLocationCode: { type: STRING(100), field: 'end_location_code' },
@@ -22,6 +22,8 @@ module.exports = app => {
         clientName: { type: STRING(100), field: 'client_name' },
         createdAt: { type: DATE, field: 'created_at' },
         updatedAt: { type: DATE, field: 'updated_at' },
+        pickUpDate: {type: DATE, field: 'pick_up_date'},
+        receiveCompany: {type: STRING(100), field: 'receive_company'},
     });
 
     return Order;
