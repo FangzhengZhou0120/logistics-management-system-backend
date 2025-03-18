@@ -8,3 +8,5 @@ alter table `waybills` add column `cargo_volume` double not null default '0';
 ALTER TABLE `waybills` MODIFY COLUMN `cargo_weight` double NOT NULL DEFAULT 0 AFTER `cargo_type`;
 ALTER TABLE `waybills` MODIFY COLUMN `cargo_type` varchar(20) NOT NULL DEFAULT '' AFTER `id`;
 ALTER TABLE `orders` MODIFY COLUMN `cargo_type` varchar(20) NOT NULL DEFAULT '' AFTER `id`;
+alter table `orders` add column `cargo_volume` double not null default '0';
+alter table `orders` add column `cargo_weight` double not null default '0';
