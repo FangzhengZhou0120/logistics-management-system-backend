@@ -1,11 +1,11 @@
 const { ORDER_NOT_FOUND } = require('../utility/error-code');
-
+const { Op } = require('sequelize');
 const Service = require('egg').Service;
 
 class Order extends Service {
     async list({ pageIndex = 1, pageSize = 10, options }) {
-        if(options.startTime) {
-            options.startTime = {[Op.between]: [new Date(options.startTime[0]), new Date(options.startTime[1])]}
+        if(options.pickUpDate) {
+            options.pickUpDate = {[Op.between]: [new Date(options.pickUpDate[0]), new Date(options.pickUpDate[1])]}
         }
         const offset = (pageIndex - 1) * pageSize
         return this.ctx.model.Order.findAndCountAll({

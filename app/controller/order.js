@@ -8,6 +8,8 @@ class OrderController extends Controller {
         body.id ? options.id = body.id : null
         body.cargoType ? options.cargoType = body.cargoType : null
         body.endLocationCode ? options.endLocationCode = body.endLocationCode : null
+        body.receiver ? options.receiver = body.receiver : null
+        body.pickUpDate ? options.pickUpDate = body.pickUpDate : null
         const user = ctx.session.user
         if(user.role === 3) {
             options.clientId = user.clientId

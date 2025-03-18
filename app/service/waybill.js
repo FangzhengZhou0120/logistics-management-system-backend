@@ -1,4 +1,5 @@
 const { WAYBILL_NOT_FOUND } = require('../utility/error-code');
+const { Op } = require('sequelize');
 
 const Service = require('egg').Service;
 
