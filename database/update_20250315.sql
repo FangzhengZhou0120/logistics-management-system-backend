@@ -10,3 +10,4 @@ ALTER TABLE `waybills` MODIFY COLUMN `cargo_type` varchar(20) NOT NULL DEFAULT '
 ALTER TABLE `orders` MODIFY COLUMN `cargo_type` varchar(20) NOT NULL DEFAULT '' AFTER `id`;
 alter table `orders` add column `cargo_volume` double not null default '0';
 alter table `orders` add column `cargo_weight` double not null default '0';
+alter table `waybills` add column `eta` datetime null;

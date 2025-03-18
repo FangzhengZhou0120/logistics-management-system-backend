@@ -39,6 +39,7 @@ module.exports = app => {
         pickUpPhone: {type: STRING(20), field: 'pick_up_phone'},
         cargoCount: {type: INTEGER, field: 'cargo_count'},
         cargoVolume: {type: DOUBLE, field: 'cargo_volume'},
+        eta: {type: DATE, field: 'eta'},
     });
 
 
