@@ -37,7 +37,7 @@ async function sinoiovHttpsCall(url, param) {
     });
 
     // 响应成功
-    console.log(`Response-code: ${response.status}, respBody: ${response.data}`);
+    console.log(`Response-code: ${response.data.status}`);
     return response.data;
   } catch (err) {
     // axios 抛错时，信息通常在 err.response、err.message 中

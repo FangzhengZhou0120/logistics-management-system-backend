@@ -3,6 +3,8 @@ const { sinoiovHttpsCall } = require('../utility/request-sinoiov');
 const { SINOIOV_BASE_URL } = require('../utility/constants');
 const { parseCustomDateString } = require('../utility/helper');
 const { Op } = require('sequelize');
+const dayjs = require('dayjs');
+const { transformDate } = require('../utility/helper');
 
 class Position extends Service {
 
@@ -15,7 +17,6 @@ class Position extends Service {
             srt: process.env.SINOIOV_SRT,
         };
         const res = await sinoiovHttpsCall(url, reqParam);
-        console.log(res)
         const data = res.result.firstVcl
         data.lat = Number(res.result.firstVcl.lat) / 600000
         data.lon = Number(res.result.firstVcl.lon) / 600000
@@ -24,25 +25,64 @@ class Position extends Service {
 
     async getTrajectory(waybillId, carNumber, carNumberColor, startTime, endTime) {
         const trajectory = await this.getLatestTrajectory(waybillId);
+        const MAX_TIME_RANGE = 72 * 60 * 60 * 1000; // 72 hours
         if (!trajectory || trajectory.reportAt < endTime) {
-            const url = `${SINOIOV_BASE_URL}routerPath`;
-            const reqParam = {
-                cid: process.env.SINOIOV_CID,
-                vclN: carNumber,
-                vco: carNumberColor,
-                qryBtm: startTime,
-                qryEtm: endTime,
-                srt: process.env.SINOIOV_SRT,
-            };
-            const res = await sinoiovHttpsCall(url, reqParam);
-            let data = res.result.trackArray
-            
-            if (trajectory) {
-                data = res.result.trackArray.filter((it) => {
-                    return parseCustomDateString(it.gtm).getTime() > trajectory.reportAt
-                })
+            let allTrackData = [];
+            if (endTime - startTime > MAX_TIME_RANGE) {
+                // Split into multiple 72-hour chunks
+                let currentStartTime = startTime;
+
+                while (currentStartTime < endTime) {
+                    // Calculate chunk end time (either 72 hours later or the overall end time)
+                    let chunkEndTime = Math.min(currentStartTime + MAX_TIME_RANGE, endTime);
+
+                    try {
+                        const url = `${SINOIOV_BASE_URL}routerPath`;
+                        const reqParam = {
+                            cid: process.env.SINOIOV_CID,
+                            vclN: carNumber,
+                            vco: carNumberColor,
+                            qryBtm: transformDate(currentStartTime),
+                            qryEtm: transformDate(chunkEndTime),
+                            srt: process.env.SINOIOV_SRT,
+                        };
+
+                        const res = await sinoiovHttpsCall(url, reqParam);
+
+                        if (res.result && res.result.trackArray) {
+                            allTrackData = allTrackData.concat(res.result.trackArray);
+                        }
+                    } catch (error) {
+                        this.ctx.logger.error(`Failed to fetch trajectory for chunk ${currentStartTime} to ${chunkEndTime}: ${error.message}`);
+                    }
+
+                    // Move to the next chunk
+                    currentStartTime = chunkEndTime;
+                }
+            } else {
+                const url = `${SINOIOV_BASE_URL}routerPath`;
+                const reqParam = {
+                    cid: process.env.SINOIOV_CID,
+                    vclN: carNumber,
+                    vco: carNumberColor,
+                    qryBtm: transformDate(startTime),
+                    qryEtm: transformDate(endTime),
+                    srt: process.env.SINOIOV_SRT,
+                };
+                const res = await sinoiovHttpsCall(url, reqParam);
+                if (res.result && res.result.trackArray) {
+                    allTrackData = res.result.trackArray;
+                }
             }
-            if(data && data.length > 0) {
+
+            let data = allTrackData
+
+            if (trajectory) {
+                data = allTrackData.filter((it) => {
+                    return parseCustomDateString(it.gtm).getTime() > trajectory.reportAt;
+                });
+            }
+            if (data && data.length > 0) {
                 data = data.map((item) => {
                     return {
                         waybillId,

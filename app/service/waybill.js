@@ -42,6 +42,7 @@ class Waybill extends Service {
             ctx.throw(500, WAYBILL_NOT_FOUND);
         }
         waybill.status = 99
+        waybill.endTime = new Date()
         await waybill.update(waybill);
         return waybill;
     }

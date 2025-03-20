@@ -153,7 +153,7 @@ class WaybillController extends Controller {
     async cancelWaybill() {
         const { ctx } = this;
         const {id} = ctx.request.body;
-        const waybill = await ctx.service.waybill.update({id, status: 99});
+        const waybill = await ctx.service.waybill.update({id, status: 99, endTime: new Date()});
         ctx.body = waybill;
     }
 }
