@@ -1,7 +1,7 @@
 const client = require("./client");
 
 module.exports = app => {
-    const { STRING, INTEGER, DATE, DOUBLE } = app.Sequelize;
+    const { STRING, INTEGER, DATE, DOUBLE, BOOLEAN } = app.Sequelize;
 
     const Order = app.model.define('order', {
         id: { type: INTEGER, primaryKey: true, autoIncrement: true },
@@ -23,6 +23,8 @@ module.exports = app => {
         createdAt: { type: DATE, field: 'created_at' },
         updatedAt: { type: DATE, field: 'updated_at' },
         pickUpDate: {type: DATE, field: 'pick_up_date'},
+        carModel: {type: STRING(100), field: 'car_model'},
+        carWait: {type: BOOLEAN, field: 'car_wait'},
         receiveCompany: {type: STRING(100), field: 'receive_company'},
         cargoWeight: { type: DOUBLE, field: 'cargo_weight' },
         cargoVolume: { type: DOUBLE, field: 'cargo_volume' },

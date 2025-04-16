@@ -40,6 +40,7 @@ module.exports = app => {
         cargoCount: {type: INTEGER, field: 'cargo_count'},
         cargoVolume: {type: DOUBLE, field: 'cargo_volume'},
         eta: {type: DATE, field: 'eta'},
+        carModel: {type: STRING(100), field: 'car_model'},
     });
 
 
