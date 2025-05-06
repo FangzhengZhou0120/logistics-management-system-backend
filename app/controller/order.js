@@ -36,7 +36,7 @@ class OrderController extends Controller {
         if (!order) {
             ctx.throw(500, ORDER_NOT_FOUND);
         }
-        await order.update({status: 99});
+        await order.update({status: 99, endTime: new Date()});
         ctx.body = order;
     }
 

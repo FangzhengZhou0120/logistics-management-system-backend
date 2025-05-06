@@ -150,7 +150,7 @@ class WaybillController extends Controller {
         const updatedWaybill = await ctx.service.waybill.update({ id, endTime, endFileList, status: 2 });
         const waybills = await ctx.service.waybill.getWaybillIdByOrderId(orderId);
         if(!waybills) {
-            await ctx.service.order.update({id: orderId, status: 2});
+            await ctx.service.order.update({id: orderId, status: 2, endTime: new Date()});
         }
         ctx.body = updatedWaybill;
     }
