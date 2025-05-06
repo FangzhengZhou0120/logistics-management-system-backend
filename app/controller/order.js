@@ -66,7 +66,7 @@ class OrderController extends Controller {
     async getAllOrder() {
         const { ctx } = this;
         const user = ctx.session.user
-        const options = {}
+        const options = {status: [0, 1, 2]}
         if(user.role === 3) {
             options.clientId = user.clientId
         }

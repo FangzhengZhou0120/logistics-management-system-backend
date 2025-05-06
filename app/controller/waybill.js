@@ -29,6 +29,7 @@ class WaybillController extends Controller {
     async create() {
         const { ctx } = this;
         const waybill = await ctx.service.waybill.create(ctx.request.body);
+        await ctx.service.order.update({id: ctx.request.body.orderId, status: 1});
         ctx.body = waybill;
     }
 
@@ -145,8 +146,12 @@ class WaybillController extends Controller {
 
     async finsihWaybill() {
         const { ctx } = this;
-        const {id, endTime, endFileList} = ctx.request.body;
+        const {id, endTime, endFileList, orderId} = ctx.request.body;
         const updatedWaybill = await ctx.service.waybill.update({ id, endTime, endFileList, status: 2 });
+        const waybills = await ctx.service.waybill.getWaybillIdByOrderId(orderId);
+        if(!waybills) {
+            await ctx.service.order.update({id: orderId, status: 2});
+        }
         ctx.body = updatedWaybill;
     }
 

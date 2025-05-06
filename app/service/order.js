@@ -18,7 +18,6 @@ class Order extends Service {
 
     async create(data) {
         const { ctx } = this;
-        data.status = 1;
         const order = await ctx.model.Order.create(data);
         return order;
     }

@@ -28,6 +28,7 @@ module.exports = app => {
         receiveCompany: {type: STRING(100), field: 'receive_company'},
         cargoWeight: { type: DOUBLE, field: 'cargo_weight' },
         cargoVolume: { type: DOUBLE, field: 'cargo_volume' },
+        eta: {type: DATE, field: 'eta'},
     });
 
     return Order;

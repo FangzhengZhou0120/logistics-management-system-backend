@@ -20,7 +20,7 @@ class Waybill extends Service {
     async create(data) {
         const { ctx } = this;
         data.status = 1;
-        data.startTime = new Date(data.startTime);
+        data.startTime = data.startTime ? new Date(data.startTime) : null;
         const waybill = await ctx.model.Waybill.create(data);
         return waybill;
     }
@@ -53,6 +53,17 @@ class Waybill extends Service {
         if (!waybill) {
             ctx.throw(500, WAYBILL_NOT_FOUND);
         }
+        return waybill;
+    }
+
+    async getWaybillIdByOrderId(orderId) {
+        const { ctx } = this;
+        const waybill = await ctx.model.Waybill.findOne({
+            where: {
+                orderId,
+                status: [0, 1]
+            }
+        });
         return waybill;
     }
 

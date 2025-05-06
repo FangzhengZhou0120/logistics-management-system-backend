@@ -25,7 +25,7 @@ module.exports = {
       end_location_code: {type: STRING(100), defaultValue: '', allowNull: false},
       start_address: {type: STRING(200), defaultValue: '', allowNull: false},
       end_address: {type: STRING(200), defaultValue: '', allowNull: false},
-      start_time: {type: DATE, defaultValue: Sequelize.fn('now'), allowNull: false},
+      start_time: {type: DATE, defaultValue: null, allowNull: true},
       end_time: {type: DATE, defaultValue: null, allowNull: true},
       status: {type: INTEGER, defaultValue: '0', allowNull: false},
       remark: {type: STRING(2000), defaultValue: '', allowNull: false},
