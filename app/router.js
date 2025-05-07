@@ -8,6 +8,7 @@ module.exports = app => {
   router.post('/api/waybill/cancel', controller.waybill.cancelWaybill);
   router.get('/api/waybill/detail', controller.waybill.find);
   router.post('/api/waybill/finish', controller.waybill.finsihWaybill);
+  router.post('/api/waybill/update', controller.waybill.update);
   // router.get('/api/waybill/upload', controller.waybill.getUploadConfig);
 
   router.post('/api/user/list', controller.user.list);
