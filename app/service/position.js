@@ -13,7 +13,6 @@ class Position extends Service {
         const reqParam = {
             cid: process.env.SINOIOV_CID,
             vnos: carNumber,
-            timeNearby: '24',
             srt: process.env.SINOIOV_SRT,
         };
         const res = await sinoiovHttpsCall(url, reqParam);
